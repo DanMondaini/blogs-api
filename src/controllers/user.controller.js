@@ -1,3 +1,4 @@
+const { User } = require('../models');
 const { createUser } = require('../services/user.service');
 
 const create = async (req, res) => {
@@ -10,6 +11,11 @@ const create = async (req, res) => {
     }
   };
 
+  const allUsers = { attributes: { exclude: ['password'] } };
+
+  const getAll = async (_req, res) => res.status(200).json(await User.findAll(allUsers));
+  
   module.exports = { 
     create,
+    getAll,
  };
